@@ -39,3 +39,4 @@ C:\Users\Dell\Desktop\CclUno\CclInventoryApp\obj\Debug\net8.0\refint\CclInventor
 C:\Users\Dell\Desktop\CclUno\CclInventoryApp\obj\Debug\net8.0\CclInventoryApp.pdb
 C:\Users\Dell\Desktop\CclUno\CclInventoryApp\obj\Debug\net8.0\CclInventoryApp.genruntimeconfig.cache
 C:\Users\Dell\Desktop\CclUno\CclInventoryApp\obj\Debug\net8.0\ref\CclInventoryApp.dll
+C:\Users\Dell\Desktop\CclUno\CclInventoryApp\bin\Debug\net8.0\BCrypt.Net-Next.dll

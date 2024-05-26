@@ -1,6 +1,5 @@
 using System;
-using System.Security.Cryptography;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using BCrypt.Net;
 
 namespace CclInventoryApp.Utilities
 {
@@ -10,42 +9,13 @@ namespace CclInventoryApp.Utilities
         // MÉTODO PARA HASHEAR UNA CONTRASEÑA
         public static string HashPassword(string password)
         {
-            byte[] salt = new byte[128 / 8];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
-
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-
-            return $"{Convert.ToBase64String(salt)}.{hashed}";
+            return BCrypt.Net.BCrypt.HashPassword(password, 12); // 12 es el costo (rounds)
         }
 
         // MÉTODO PARA VERIFICAR UNA CONTRASEÑA
         public static bool VerifyPassword(string hashedPassword, string password)
         {
-            var parts = hashedPassword.Split('.');
-            if (parts.Length != 2)
-            {
-                throw new FormatException("Unexpected hash format.");
-            }
-
-            var salt = Convert.FromBase64String(parts[0]);
-            var storedHash = parts[1];
-
-            var hashToCompare = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: password,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA256,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 8));
-
-            return storedHash == hashToCompare;
+            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
         }
     }
 }

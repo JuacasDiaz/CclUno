@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Disev7aGb68=",
+  "dgSpecHash": "BmIV2wKCDb8=",
   "success": true,
   "projectFilePath": "C:\\Users\\Dell\\Desktop\\CclUno\\CclInventoryApp\\CclInventoryApp.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Dell\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
     "C:\\Users\\Dell\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
