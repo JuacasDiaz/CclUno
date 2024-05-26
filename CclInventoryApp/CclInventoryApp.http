@@ -1,0 +1,6 @@
+@CclInventoryApp_HostAddress = http://localhost:5000
+
+GET {{CclInventoryApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
