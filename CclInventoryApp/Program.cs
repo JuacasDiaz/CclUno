@@ -40,11 +40,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                ValidAudience = builder.Configuration["Jwt:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                ValidIssuer = "YourIssuerHere", // Reemplaza con tu emisor
+                ValidAudience = "YourAudienceHere", // Reemplaza con tu audiencia
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("YourSecretKeyHere")) // Reemplaza con tu clave secreta
             };
         });
+
 builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();

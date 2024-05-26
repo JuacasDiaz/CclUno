@@ -1,7 +1,7 @@
-using CclInventoryApp.Dtos;
 using CclInventoryApp.Exceptions;
 using CclInventoryApp.Models;
 using CclInventoryApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
@@ -10,6 +10,7 @@ namespace CclInventoryApp.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize] // Asegura todas las rutas del controlador
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -41,33 +42,23 @@ namespace CclInventoryApp.Controllers
 
         // MÉTODO PARA CREAR UN NUEVO PRODUCTO
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateProductDto createProductDto)
+        public async Task<IActionResult> Create([FromBody] Product product)
         {
-            var product = new Product
-            {
-                Name = createProductDto.Name,
-                Description = createProductDto.Description,
-                Price = createProductDto.Price
-            };
-
             await _productService.AddAsync(product);
             return CreatedAtAction(nameof(GetById), new { id = product.Id }, new { data = product });
         }
 
         // MÉTODO PARA ACTUALIZAR UN PRODUCTO
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateProductDto updateProductDto)
+        public async Task<IActionResult> Update(int id, [FromBody] Product product)
         {
             var existingProduct = await _productService.GetByIdAsync(id);
             if (existingProduct == null)
                 throw new AppException("PRODUCT NOT FOUND", (int)HttpStatusCode.NotFound);
 
-            existingProduct.Name = updateProductDto.Name;
-            existingProduct.Description = updateProductDto.Description;
-            existingProduct.Price = updateProductDto.Price;
-
-            await _productService.UpdateAsync(existingProduct);
-            return Ok(new { data = existingProduct });
+            product.Id = id;
+            await _productService.UpdateAsync(product);
+            return Ok(new { data = product });
         }
 
         // MÉTODO PARA ELIMINAR UN PRODUCTO

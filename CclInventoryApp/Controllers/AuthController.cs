@@ -1,12 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-using Microsoft.IdentityModel.Tokens;
 using CclInventoryApp.Dtos;
 using CclInventoryApp.Models;
 using CclInventoryApp.Services;
-using CclInventoryApp.Utilities; 
+using CclInventoryApp.Utilities;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CclInventoryApp.Controllers
 {
@@ -15,43 +17,42 @@ namespace CclInventoryApp.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IConfiguration _configuration;
 
-        public AuthController(IUserService userService, IConfiguration configuration)
+        public AuthController(IUserService userService)
         {
             _userService = userService;
-            _configuration = configuration;
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginDto model)
         {
             var user = await _userService.GetByUsernameAsync(model.Username);
+
             if (user == null || !PasswordHasher.VerifyPassword(user.Password, model.Password))
             {
-                return Unauthorized(new { message = "Invalid username or password" });
+                return Unauthorized("Invalid username or password");
             }
 
-            var token = GenerateJwtToken(user);
-            return Ok(new { token });
-        }
-
-        private string GenerateJwtToken(User user)
-        {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+            var key = Encoding.UTF8.GetBytes("YourSecretKeyHere"); // Reemplaza con tu clave secreta
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                    new Claim(ClaimTypes.Name, user.Username)
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Issuer = "YourIssuerHere", // Reemplaza con tu emisor
+                Audience = "YourAudienceHere" // Reemplaza con tu audiencia
             };
+
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            return Ok(new { Token = tokenString });
         }
     }
 }
