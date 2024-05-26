@@ -1,22 +1,29 @@
 using CclInventoryApp.Exceptions;
 using CclInventoryApp.Models;
 using CclInventoryApp.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Threading.Tasks;
+using CclInventoryApp.Dtos;
 
 namespace CclInventoryApp.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [Authorize]
     public class InventoryExitsController : ControllerBase
     {
         private readonly IInventoryExitService _inventoryExitService;
+        private readonly IProductService _productService;
+        private readonly IUserService _userService;
 
         // CONSTRUCTOR DEL CONTROLADOR
-        public InventoryExitsController(IInventoryExitService inventoryExitService)
+        public InventoryExitsController(IInventoryExitService inventoryExitService, IProductService productService, IUserService userService)
         {
             _inventoryExitService = inventoryExitService;
+            _productService = productService;
+            _userService = userService;
         }
 
         // MÉTODO PARA OBTENER TODAS LAS SALIDAS DE INVENTARIO
@@ -40,8 +47,33 @@ namespace CclInventoryApp.Controllers
 
         // MÉTODO PARA CREAR UNA NUEVA SALIDA DE INVENTARIO
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] InventoryExit inventoryExit)
+        public async Task<IActionResult> Create([FromBody] CreateInventoryExitDto inventoryExitDto)
         {
+            // Verificar si el producto existe
+            var product = await _productService.GetByIdAsync(inventoryExitDto.ProductId);
+            if (product == null)
+            {
+                ModelState.AddModelError("Product", "The Product field is required.");
+                return BadRequest(ModelState);
+            }
+
+            // Verificar si el usuario existe
+            var user = await _userService.GetByIdAsync(inventoryExitDto.UserId);
+            if (user == null)
+            {
+                ModelState.AddModelError("User", "The User field is required.");
+                return BadRequest(ModelState);
+            }
+
+            // Crear la salida de inventario
+            var inventoryExit = new InventoryExit
+            {
+                ProductId = inventoryExitDto.ProductId,
+                UserId = inventoryExitDto.UserId,
+                Quantity = inventoryExitDto.Quantity,
+                Reason = inventoryExitDto.Reason
+            };
+
             await _inventoryExitService.AddAsync(inventoryExit);
             return CreatedAtAction(nameof(GetById), new { id = inventoryExit.Id }, new { data = inventoryExit });
         }

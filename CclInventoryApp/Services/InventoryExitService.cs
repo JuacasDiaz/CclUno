@@ -2,6 +2,8 @@ using CclInventoryApp.Models;
 using CclInventoryApp.Repositories;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
+using CclInventoryApp.Dtos;
 
 namespace CclInventoryApp.Services
 {
@@ -17,15 +19,72 @@ namespace CclInventoryApp.Services
         }
 
         // MÉTODO PARA OBTENER TODAS LAS SALIDAS DE INVENTARIO
-        public async Task<IEnumerable<InventoryExit>> GetAllAsync()
+        public async Task<IEnumerable<InventoryExitDto>> GetAllAsync()
         {
-            return await _inventoryExitRepository.GetAllAsync();
+            var exits = await _inventoryExitRepository.GetAllAsync();
+            return exits.Select(exit => new InventoryExitDto
+            {
+                Id = exit.Id,
+                ProductId = exit.ProductId,
+                UserId = exit.UserId,
+                Quantity = exit.Quantity,
+                Reason = exit.Reason,
+                Date = exit.Date,
+                CreatedAt = exit.CreatedAt,
+                Product = new ProductDto
+                {
+                    Id = exit.Product.Id,
+                    Name = exit.Product.Name,
+                    Description = exit.Product.Description,
+                    Price = exit.Product.Price,
+                    CreatedAt = exit.Product.CreatedAt,
+                    UpdatedAt = exit.Product.UpdatedAt
+                },
+                User = new UserDto
+                {
+                    Id = exit.User.Id,
+                    Username = exit.User.Username,
+                    CreatedAt = exit.User.CreatedAt,
+                    UpdatedAt = exit.User.UpdatedAt
+                }
+            }).ToList();
         }
 
         // MÉTODO PARA OBTENER UNA SALIDA DE INVENTARIO POR ID
-        public async Task<InventoryExit> GetByIdAsync(int id)
+        public async Task<InventoryExitDto> GetByIdAsync(int id)
         {
-            return await _inventoryExitRepository.GetByIdAsync(id);
+            var exit = await _inventoryExitRepository.GetByIdAsync(id);
+            if (exit == null)
+            {
+                return null;
+            }
+
+            return new InventoryExitDto
+            {
+                Id = exit.Id,
+                ProductId = exit.ProductId,
+                UserId = exit.UserId,
+                Quantity = exit.Quantity,
+                Reason = exit.Reason,
+                Date = exit.Date,
+                CreatedAt = exit.CreatedAt,
+                Product = new ProductDto
+                {
+                    Id = exit.Product.Id,
+                    Name = exit.Product.Name,
+                    Description = exit.Product.Description,
+                    Price = exit.Product.Price,
+                    CreatedAt = exit.Product.CreatedAt,
+                    UpdatedAt = exit.Product.UpdatedAt
+                },
+                User = new UserDto
+                {
+                    Id = exit.User.Id,
+                    Username = exit.User.Username,
+                    CreatedAt = exit.User.CreatedAt,
+                    UpdatedAt = exit.User.UpdatedAt
+                }
+            };
         }
 
         // MÉTODO PARA AÑADIR UNA NUEVA SALIDA DE INVENTARIO

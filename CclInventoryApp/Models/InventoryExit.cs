@@ -29,7 +29,7 @@ namespace CclInventoryApp.Models
         public int UserId { get; set; }
 
         /// <summary>
-        /// Cantidad de producto salida.
+        /// Cantidad de producto saliente.
         /// </summary>
         [Required]
         public int Quantity { get; set; }

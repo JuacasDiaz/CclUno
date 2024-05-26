@@ -19,13 +19,13 @@ namespace CclInventoryApp.Repositories
         // MÉTODO PARA OBTENER TODAS LAS SALIDAS DE INVENTARIO
         public async Task<IEnumerable<InventoryExit>> GetAllAsync()
         {
-            return await _context.InventoryExits.ToListAsync();
+            return await _context.InventoryExits.Include(ie => ie.Product).Include(ie => ie.User).ToListAsync();
         }
 
         // MÉTODO PARA OBTENER UNA SALIDA DE INVENTARIO POR ID
         public async Task<InventoryExit> GetByIdAsync(int id)
         {
-            return await _context.InventoryExits.FindAsync(id);
+            return await _context.InventoryExits.Include(ie => ie.Product).Include(ie => ie.User).FirstOrDefaultAsync(ie => ie.Id == id);
         }
 
         // MÉTODO PARA AÑADIR UNA NUEVA SALIDA DE INVENTARIO
@@ -45,10 +45,10 @@ namespace CclInventoryApp.Repositories
         // MÉTODO PARA ELIMINAR UNA SALIDA DE INVENTARIO
         public async Task DeleteAsync(int id)
         {
-            var exit = await _context.InventoryExits.FindAsync(id);
-            if (exit != null)
+            var inventoryExit = await _context.InventoryExits.FindAsync(id);
+            if (inventoryExit != null)
             {
-                _context.InventoryExits.Remove(exit);
+                _context.InventoryExits.Remove(inventoryExit);
                 await _context.SaveChangesAsync();
             }
         }
