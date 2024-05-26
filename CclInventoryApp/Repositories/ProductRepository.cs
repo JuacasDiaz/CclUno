@@ -1,6 +1,8 @@
 using CclInventoryApp.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CclInventoryApp.Repositories
@@ -51,6 +53,18 @@ namespace CclInventoryApp.Repositories
                 _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        // MÉTODO PARA OBTENER PRODUCTOS FILTRADOS POR FECHAS DE INGRESO
+        public async Task<IEnumerable<Product>> GetByDateRangeAsync(DateTime startDate, DateTime endDate)
+        {
+            // Convertir las fechas a UTC antes de la consulta
+            startDate = startDate.ToUniversalTime();
+            endDate = endDate.ToUniversalTime();
+
+            return await _context.Products
+                .Where(p => p.CreatedAt >= startDate && p.CreatedAt <= endDate)
+                .ToListAsync();
         }
     }
 }

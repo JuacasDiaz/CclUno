@@ -1,4 +1,5 @@
 using CclInventoryApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -21,5 +22,8 @@ namespace CclInventoryApp.Repositories
 
         // MÉTODO PARA ELIMINAR UN PRODUCTO
         Task DeleteAsync(int id);
+
+        // MÉTODO PARA OBTENER PRODUCTOS FILTRADOS POR FECHAS DE INGRESO
+        Task<IEnumerable<Product>> GetByDateRangeAsync(DateTime startDate, DateTime endDate);
     }
 }

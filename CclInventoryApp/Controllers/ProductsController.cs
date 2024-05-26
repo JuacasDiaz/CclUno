@@ -3,6 +3,7 @@ using CclInventoryApp.Models;
 using CclInventoryApp.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace CclInventoryApp.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    [Authorize] // Asegura todas las rutas del controlador
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -38,6 +39,14 @@ namespace CclInventoryApp.Controllers
                 throw new AppException("PRODUCT NOT FOUND", (int)HttpStatusCode.NotFound);
 
             return Ok(new { data = product });
+        }
+
+        // MÉTODO PARA OBTENER PRODUCTOS FILTRADOS POR FECHAS DE INGRESO
+        [HttpGet("dates")]
+        public async Task<IActionResult> GetByDateRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+        {
+            var products = await _productService.GetByDateRangeAsync(startDate, endDate);
+            return Ok(new { data = products });
         }
 
         // MÉTODO PARA CREAR UN NUEVO PRODUCTO

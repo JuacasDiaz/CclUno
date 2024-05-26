@@ -1,25 +1,41 @@
-using CclInventoryApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CclInventoryApp.Models;
 
 namespace CclInventoryApp.Services
 {
-    // INTERFAZ DEL SERVICIO DE PRODUCTOS
+    // INTERFAZ DEL SERVICIO DE PRODUCTOS QUE DEFINE LAS OPERACIONES CRUD Y FILTRADO POR FECHAS.
     public interface IProductService
     {
         // MÉTODO PARA OBTENER TODOS LOS PRODUCTOS
+        // RETORNA UNA TAREA ASINCRÓNICA QUE CONTIENE UNA COLECCIÓN DE PRODUCTOS
         Task<IEnumerable<Product>> GetAllAsync();
 
         // MÉTODO PARA OBTENER UN PRODUCTO POR ID
+        // PARÁMETRO: ID DEL PRODUCTO A OBTENER
+        // RETORNA UNA TAREA ASINCRÓNICA QUE CONTIENE EL PRODUCTO SOLICITADO
         Task<Product> GetByIdAsync(int id);
 
+        // MÉTODO PARA OBTENER PRODUCTOS FILTRADOS POR UN RANGO DE FECHAS DE INGRESO
+        // PARÁMETRO: FECHA DE INICIO DEL RANGO
+        // PARÁMETRO: FECHA DE FIN DEL RANGO
+        // RETORNA UNA TAREA ASINCRÓNICA QUE CONTIENE UNA COLECCIÓN DE PRODUCTOS FILTRADOS
+        Task<IEnumerable<Product>> GetByDateRangeAsync(DateTime startDate, DateTime endDate);
+
         // MÉTODO PARA AÑADIR UN NUEVO PRODUCTO
-        Task AddAsync(Product product);
+        // PARÁMETRO: PRODUCTO A AÑADIR
+        // RETORNA UNA TAREA ASINCRÓNICA QUE CONTIENE EL PRODUCTO AÑADIDO
+        Task<Product> AddAsync(Product product);
 
         // MÉTODO PARA ACTUALIZAR UN PRODUCTO
-        Task UpdateAsync(Product product);
+        // PARÁMETRO: PRODUCTO A ACTUALIZAR
+        // RETORNA UNA TAREA ASINCRÓNICA QUE CONTIENE EL PRODUCTO ACTUALIZADO
+        Task<Product> UpdateAsync(Product product);
 
-        // MÉTODO PARA ELIMINAR UN PRODUCTO
-        Task DeleteAsync(int id);
+        // MÉTODO PARA ELIMINAR UN PRODUCTO POR ID
+        // PARÁMETRO: ID DEL PRODUCTO A ELIMINAR
+        // RETORNA UNA TAREA ASINCRÓNICA QUE INDICA SI LA OPERACIÓN FUE EXITOSA
+        Task<bool> DeleteAsync(int id);
     }
 }
