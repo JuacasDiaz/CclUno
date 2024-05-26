@@ -19,13 +19,19 @@ namespace CclInventoryApp.Repositories
         // MÉTODO PARA OBTENER TODAS LAS ENTRADAS DE INVENTARIO
         public async Task<IEnumerable<InventoryEntry>> GetAllAsync()
         {
-            return await _context.InventoryEntries.ToListAsync();
+            return await _context.InventoryEntries
+                .Include(ie => ie.Product) // Incluir Producto
+                .Include(ie => ie.User) // Incluir Usuario
+                .ToListAsync();
         }
 
         // MÉTODO PARA OBTENER UNA ENTRADA DE INVENTARIO POR ID
         public async Task<InventoryEntry> GetByIdAsync(int id)
         {
-            return await _context.InventoryEntries.FindAsync(id);
+            return await _context.InventoryEntries
+                .Include(ie => ie.Product) // Incluir Producto
+                .Include(ie => ie.User) // Incluir Usuario
+                .FirstOrDefaultAsync(ie => ie.Id == id);
         }
 
         // MÉTODO PARA AÑADIR UNA NUEVA ENTRADA DE INVENTARIO
@@ -45,10 +51,10 @@ namespace CclInventoryApp.Repositories
         // MÉTODO PARA ELIMINAR UNA ENTRADA DE INVENTARIO
         public async Task DeleteAsync(int id)
         {
-            var entry = await _context.InventoryEntries.FindAsync(id);
-            if (entry != null)
+            var inventoryEntry = await _context.InventoryEntries.FindAsync(id);
+            if (inventoryEntry != null)
             {
-                _context.InventoryEntries.Remove(entry);
+                _context.InventoryEntries.Remove(inventoryEntry);
                 await _context.SaveChangesAsync();
             }
         }

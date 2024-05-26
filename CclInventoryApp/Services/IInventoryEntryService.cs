@@ -1,3 +1,4 @@
+using CclInventoryApp.Dtos;
 using CclInventoryApp.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -8,10 +9,10 @@ namespace CclInventoryApp.Services
     public interface IInventoryEntryService
     {
         // MÉTODO PARA OBTENER TODAS LAS ENTRADAS DE INVENTARIO
-        Task<IEnumerable<InventoryEntry>> GetAllAsync();
+        Task<IEnumerable<InventoryEntryDto>> GetAllAsync();
 
         // MÉTODO PARA OBTENER UNA ENTRADA DE INVENTARIO POR ID
-        Task<InventoryEntry> GetByIdAsync(int id);
+        Task<InventoryEntryDto> GetByIdAsync(int id);
 
         // MÉTODO PARA AÑADIR UNA NUEVA ENTRADA DE INVENTARIO
         Task AddAsync(InventoryEntry inventoryEntry);
