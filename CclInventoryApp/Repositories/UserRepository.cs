@@ -28,6 +28,12 @@ namespace CclInventoryApp.Repositories
             return await _context.Users.FindAsync(id);
         }
 
+        // MÉTODO PARA OBTENER UN USUARIO POR NOMBRE DE USUARIO
+        public async Task<User> GetByUsernameAsync(string username)
+        {
+            return await _context.Users.SingleOrDefaultAsync(u => u.Username == username);
+        }
+
         // MÉTODO PARA AÑADIR UN NUEVO USUARIO
         public async Task AddAsync(User user)
         {

@@ -13,6 +13,9 @@ namespace CclInventoryApp.Services
         // MÉTODO PARA OBTENER UN USUARIO POR ID
         Task<User> GetByIdAsync(int id);
 
+        // MÉTODO PARA OBTENER UN USUARIO POR NOMBRE DE USUARIO
+        Task<User> GetByUsernameAsync(string username); // Añadir este método
+
         // MÉTODO PARA AÑADIR UN NUEVO USUARIO
         Task AddAsync(User user);
 

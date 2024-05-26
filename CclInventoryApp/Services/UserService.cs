@@ -1,5 +1,6 @@
 using CclInventoryApp.Models;
 using CclInventoryApp.Repositories;
+using CclInventoryApp.Utilities; // Importar el espacio de nombres correcto
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,9 +29,16 @@ namespace CclInventoryApp.Services
             return await _userRepository.GetByIdAsync(id);
         }
 
+        // MÉTODO PARA OBTENER UN USUARIO POR NOMBRE DE USUARIO
+        public async Task<User> GetByUsernameAsync(string username)
+        {
+            return await _userRepository.GetByUsernameAsync(username);
+        }
+
         // MÉTODO PARA AÑADIR UN NUEVO USUARIO
         public async Task AddAsync(User user)
         {
+            user.Password = PasswordHasher.HashPassword(user.Password);
             await _userRepository.AddAsync(user);
         }
 
