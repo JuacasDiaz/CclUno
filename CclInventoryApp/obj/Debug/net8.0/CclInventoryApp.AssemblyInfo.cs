@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CclInventoryApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3693359c8704db63588619db33d24a0ff0109306")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b3f443e3c0889cde037c0a7efd044bbb181bbe06")]
 [assembly: System.Reflection.AssemblyProductAttribute("CclInventoryApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CclInventoryApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

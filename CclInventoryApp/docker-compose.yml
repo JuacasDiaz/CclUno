@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  cclinventoryapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__DefaultConnection=Host=dpg-cp958nsf7o1s739s7ehg-a.virginia-postgres.render.com;Database=cclone_0f48;Username=cclone_0f48_user;Password=U489ijuUtAHU5Ae4Svda2c6MpStmENvt;CommandTimeout=30
