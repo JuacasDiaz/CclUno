@@ -40,6 +40,12 @@ namespace CclInventoryApp.Repositories
         // MÉTODO PARA ACTUALIZAR UN PRODUCTO
         public async Task UpdateAsync(Product product)
         {
+            var existingProduct = await _context.Products.FindAsync(product.Id);
+            if (existingProduct != null)
+            {
+                _context.Entry(existingProduct).State = EntityState.Detached;
+            }
+
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
         }
