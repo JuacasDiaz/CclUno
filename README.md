@@ -33,11 +33,11 @@ Copiar código
 
 -----------------------------------------------------------------------------------------------------------------------
 
-2. Consulta de Inventario
+   2. Consulta de Inventario
 
-2.1 Entrada Inventario
+      2.1 Entrada Inventario
 
-Endpoint: /api/v1/inventoryentries
+     Endpoint: /api/v1/inventoryentries
 
 Método: GET
 
@@ -46,7 +46,9 @@ Descripción: Devuelve una lista de todos los productos en el inventario.
 Parámetros de la Solicitud:
 
 •	Authorization: Bearer {token}
+
 Respuesta:
+
 json
 Copiar código
 
