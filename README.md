@@ -51,13 +51,10 @@ json
 Copiar código
 
 [
-    {
-        "productId": "int",
-        "productName": "string",
-        "quantity": "int",
-        "lastUpdated": "string"
-    },
-    ...
+   "productId": 2,
+   "quantity": 20,
+   "method": "compra",
+   "userId": 1
 ]
 
 •	200 OK - Lista de productos obtenida con éxito.
@@ -80,9 +77,12 @@ Parámetros del Cuerpo de la Solicitud:
 json
 Copiar código
 {
-    "productId": "int",
-    "quantity": "int",
-    "entryType": "string"  // Ejemplo: "purchase", "transfer"
+   
+  "productId": 5,
+  "userId": 2,
+  "quantity": 10,
+  "reason": "venta"
+}
 }
 
 Respuesta: 
@@ -108,9 +108,12 @@ Parámetros del Cuerpo de la Solicitud:
 json
 Copiar código
 {
-    "productId": "int",
-    "quantity": "int",
-    "exitType": "string"  // Ejemplo: "sale", "damage", "transfer"
+
+  "productId": 5,
+  "userId": 2,
+  "quantity": 10,
+  "reason": "venta"
+
 }
 Respuesta:
 •	201 Created - Salida registrada con éxito.
