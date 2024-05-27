@@ -100,7 +100,7 @@ Respuesta:
 
        4.1 Registrar Salida
 
-       Endpoint: api/v1/inventoryexits
+            Endpoint: api/v1/inventoryexits
 
 Método: POST
 
@@ -129,7 +129,7 @@ Respuesta:
 
       5.1 Crear Producto
 
-      Endpoint: /api/v1/products
+          Endpoint: /api/v1/products
 
 Método: POST
 
