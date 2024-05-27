@@ -64,11 +64,12 @@ Copiar código
 
 ---------------------------------------------------------------------------------------------------------------------------
 
-3. Ingreso de Mercancía
+   3. Ingreso de Mercancía
 
-3.1 Registrar Ingreso
+     3.1 Registrar Ingreso
 
-Endpoint: /api/v1/inventoryentries
+     Endpoint: /api/v1/inventoryentries
+
 
 Método: POST
 
@@ -95,11 +96,11 @@ Respuesta:
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-4. Salida de Mercancía
+   4. Salida de Mercancía
 
-4.1 Registrar Salida
+       4.1 Registrar Salida
 
-Endpoint: api/v1/inventoryexits
+       Endpoint: api/v1/inventoryexits
 
 Método: POST
 
@@ -124,11 +125,11 @@ Respuesta:
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
-5. Gestión de Productos
+    5. Gestión de Productos
 
-5.1 Crear Producto
+       5.1 Crear Producto
 
-Endpoint: /api/v1/products
+       Endpoint: /api/v1/products
 
 Método: POST
 
@@ -149,9 +150,9 @@ Respuesta:
 •	401 Unauthorized - Token no válido o expirado.
 
 
-5.2 Actualizar Producto
+    5.2 Actualizar Producto
 
-Endpoint: /api/v1/products/{id}
+    Endpoint: /api/v1/products/{id}
 
 Método: PUT
 
@@ -174,9 +175,9 @@ Respuesta:
 •	401 Unauthorized - Token no válido o expirado.
 •	404 Not Found - Producto no encontrado.
 
-5.3 Eliminar Producto
+    5.3 Eliminar Producto
 
-Endpoint: /api/v1/products/{id}
+    Endpoint: /api/v1/products/{id}
 
 Método: DELETE
 
