@@ -5,7 +5,11 @@ Manual de Endpoints del Backend - CclInventoryApp
 
    1. Autenticación de Usuarios
 
-       Usuarios existentes en la base de datos: {usuario1, contraseña: password1}.{usuario2, contraseña: password2}
+       Usuarios existentes en la base de datos:
+       {usuario1, contraseña: password1}.
+       {usuario2, contraseña: password2}
+
+       Todos los metodos esta protegidos via [Autorize], para autenticarse, ingresar token.
 
        direccion del servidor en render para probar endpoints: https://ccluno.onrender.com/api/v1/
 
@@ -51,13 +55,79 @@ Respuesta:
 
 json
 Copiar código
-
-[
-   "productId": 2,
-   "quantity": 20,
-   "method": "compra",
-   "userId": 1
-]
+{
+  "data": [
+    {
+      "id": 1,
+      "productId": 2,
+      "userId": 1,
+      "quantity": 20,
+      "method": "compra",
+      "date": "2024-05-28T15:00:00Z",
+      "createdAt": "2024-05-26T21:40:05.991985Z",
+      "product": {
+        "id": 2,
+        "name": "Producto 2",
+        "description": "Descripción del Producto 2",
+        "price": 29.99,
+        "createdAt": "2024-05-26T17:17:09.470896Z",
+        "updatedAt": "2024-05-26T17:17:09.470896Z"
+      },
+      "user": {
+        "id": 1,
+        "username": "usuario1",
+        "createdAt": "2024-05-26T17:30:29.770867Z",
+        "updatedAt": "2024-05-26T17:30:29.770867Z"
+      }
+    },
+    {
+      "id": 2,
+      "productId": 2,
+      "userId": 1,
+      "quantity": 20,
+      "method": "compra",
+      "date": "2024-05-28T15:00:00Z",
+      "createdAt": "2024-05-26T22:40:26.269702Z",
+      "product": {
+        "id": 2,
+        "name": "Producto 2",
+        "description": "Descripción del Producto 2",
+        "price": 29.99,
+        "createdAt": "2024-05-26T17:17:09.470896Z",
+        "updatedAt": "2024-05-26T17:17:09.470896Z"
+      },
+      "user": {
+        "id": 1,
+        "username": "usuario1",
+        "createdAt": "2024-05-26T17:30:29.770867Z",
+        "updatedAt": "2024-05-26T17:30:29.770867Z"
+      }
+    },
+    {
+      "id": 3,
+      "productId": 2,
+      "userId": 1,
+      "quantity": 20,
+      "method": "compra",
+      "date": "2024-05-26T22:45:43.128171Z",
+      "createdAt": "2024-05-26T22:45:43.128172Z",
+      "product": {
+        "id": 2,
+        "name": "Producto 2",
+        "description": "Descripción del Producto 2",
+        "price": 29.99,
+        "createdAt": "2024-05-26T17:17:09.470896Z",
+        "updatedAt": "2024-05-26T17:17:09.470896Z"
+      },
+      "user": {
+        "id": 1,
+        "username": "usuario1",
+        "createdAt": "2024-05-26T17:30:29.770867Z",
+        "updatedAt": "2024-05-26T17:30:29.770867Z"
+      }
+    }
+  ]
+}
 
 •	200 OK - Lista de productos obtenida con éxito.
 •	401 Unauthorized - Token no válido o expirado.
@@ -188,3 +258,105 @@ Respuesta:
 •	401 Unauthorized - Token no válido o expirado.
 •	404 Not Found - Producto no encontrado.
 
+5.4 Productos
+
+    Endpoint: /api/v1/products
+
+Metodo: Get
+
+Descripción: Trae los productos.
+
+
+
+Respuesta:
+
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Producto 1",
+      "description": "Descripción del Producto 1",
+      "price": 19.99,
+      "createdAt": "2024-05-26T17:17:09.470896Z",
+      "updatedAt": "2024-05-26T17:17:09.470896Z"
+    },
+    {
+      "id": 2,
+      "name": "Producto 2",
+      "description": "Descripción del Producto 2",
+      "price": 29.99,
+      "createdAt": "2024-05-26T17:17:09.470896Z",
+      "updatedAt": "2024-05-26T17:17:09.470896Z"
+    },
+    {
+      "id": 3,
+      "name": "Producto 3",
+      "description": "Descripción del Producto 3",
+      "price": 39.99,
+      "createdAt": "2024-05-26T17:17:09.470896Z",
+      "updatedAt": "2024-05-26T17:17:09.470896Z"
+    },
+    {
+      "id": 4,
+      "name": "Producto 4",
+      "description": "Descripción del Producto 4",
+      "price": 49.99,
+      "createdAt": "2024-05-26T17:17:09.470896Z",
+      "updatedAt": "2024-05-26T17:17:09.470896Z"
+    },
+    {
+      "id": 5,
+      "name": "Producto 5",
+      "description": "Descripción del Producto 5",
+      "price": 59.99,
+      "createdAt": "2024-05-26T17:17:09.470896Z",
+      "updatedAt": "2024-05-26T17:17:09.470896Z"
+    },
+    {
+      "id": 6,
+      "name": "Producto A",
+      "description": "Descripción del Producto A",
+      "price": 10.99,
+      "createdAt": "2023-01-15T17:17:09.470896Z",
+      "updatedAt": "2023-01-15T17:17:09.470896Z"
+    },
+    {
+      "id": 7,
+      "name": "Producto B",
+      "description": "Descripción del Producto B",
+      "price": 20.99,
+      "createdAt": "2023-02-20T17:17:09.470896Z",
+      "updatedAt": "2023-02-20T17:17:09.470896Z"
+    },
+    {
+      "id": 8,
+      "name": "Producto C",
+      "description": "Descripción del Producto C",
+      "price": 30.99,
+      "createdAt": "2023-03-10T17:17:09.470896Z",
+      "updatedAt": "2023-03-10T17:17:09.470896Z"
+    },
+    {
+      "id": 9,
+      "name": "Producto D",
+      "description": "Descripción del Producto D",
+      "price": 40.99,
+      "createdAt": "2023-04-05T17:17:09.470896Z",
+      "updatedAt": "2023-04-05T17:17:09.470896Z"
+    },
+    {
+      "id": 10,
+      "name": "Producto E",
+      "description": "Descripción del Producto E",
+      "price": 50.99,
+      "createdAt": "2023-05-01T17:17:09.470896Z",
+      "updatedAt": "2023-05-01T17:17:09.470896Z"
+    }
+  ]
+}
+•	204 No Content - Producto eliminado con éxito.
+•	401 Unauthorized - Token no válido o expirado.
+•	404 Not Found - Producto no encontrado.
+
+
+   
