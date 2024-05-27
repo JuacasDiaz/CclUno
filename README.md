@@ -35,7 +35,7 @@ Copiar código
 
 2. Consulta de Inventario
 
-2.1 Obtener Inventario
+2.1 Entrada Inventario
 
 Endpoint: /api/v1/inventoryentries
 
@@ -69,7 +69,7 @@ Copiar código
 
 3.1 Registrar Ingreso
 
-Endpoint: /api/entry
+Endpoint: /api/v1/inventoryentries
 
 Método: POST
 
@@ -97,7 +97,7 @@ Respuesta:
 
 4.1 Registrar Salida
 
-Endpoint: /api/exit
+Endpoint: api/v1/inventoryexits
 
 Método: POST
 
@@ -123,7 +123,7 @@ Respuesta:
 
 5.1 Crear Producto
 
-Endpoint: /api/products
+Endpoint: /api/v1/products
 
 Método: POST
 
@@ -134,10 +134,10 @@ Parámetros del Cuerpo de la Solicitud:
 json
 Copiar código
 {
-    "productName": "string",
-    "initialQuantity": "int"
+  "name": "String",
+  "description": "String",
+  "price": decimal
 }
-
 Respuesta:
 •	201 Created - Producto creado con éxito.
 •	400 Bad Request - Error en la solicitud.
@@ -146,7 +146,7 @@ Respuesta:
 
 5.2 Actualizar Producto
 
-Endpoint: /api/products/{id}
+Endpoint: /api/v1/products{id}
 
 Método: PUT
 
@@ -171,7 +171,7 @@ Respuesta:
 
 5.3 Eliminar Producto
 
-Endpoint: /api/products/{id}
+Endpoint: /api/v1/products{id}
 
 Método: DELETE
 
