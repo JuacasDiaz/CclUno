@@ -66,9 +66,9 @@ Copiar código
 
    3. Ingreso de Mercancía
 
-     3.1 Registrar Ingreso
+      3.1 Registrar Ingreso
 
-         Endpoint: /api/v1/inventoryentries
+          Endpoint: /api/v1/inventoryentries
 
 
 Método: POST
