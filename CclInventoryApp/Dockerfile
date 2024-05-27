@@ -1,5 +1,5 @@
-# Utilizar una imagen base de .NET para la construcción
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+# Utilizar una imagen base de .NET para la construcción con el SDK de .NET 8.0
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copiar los archivos de proyecto y restaurar las dependencias
@@ -10,8 +10,8 @@ RUN dotnet restore
 COPY . ./
 RUN dotnet publish -c Release -o out
 
-# Utilizar una imagen base de .NET para la ejecución
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+# Utilizar una imagen base de .NET para la ejecución con el runtime de .NET 8.0
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/out .
 
