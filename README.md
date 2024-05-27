@@ -37,7 +37,7 @@ Copiar código
 
       2.1 Entrada Inventario
 
-     Endpoint: /api/v1/inventoryentries
+          Endpoint: /api/v1/inventoryentries
 
 Método: GET
 
@@ -68,7 +68,7 @@ Copiar código
 
      3.1 Registrar Ingreso
 
-     Endpoint: /api/v1/inventoryentries
+         Endpoint: /api/v1/inventoryentries
 
 
 Método: POST
@@ -125,11 +125,11 @@ Respuesta:
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    5. Gestión de Productos
+   5. Gestión de Productos
 
-       5.1 Crear Producto
+      5.1 Crear Producto
 
-       Endpoint: /api/v1/products
+      Endpoint: /api/v1/products
 
 Método: POST
 
@@ -150,7 +150,7 @@ Respuesta:
 •	401 Unauthorized - Token no válido o expirado.
 
 
-    5.2 Actualizar Producto
+5.2 Actualizar Producto
 
     Endpoint: /api/v1/products/{id}
 
@@ -175,7 +175,7 @@ Respuesta:
 •	401 Unauthorized - Token no válido o expirado.
 •	404 Not Found - Producto no encontrado.
 
-    5.3 Eliminar Producto
+ 5.3 Eliminar Producto
 
     Endpoint: /api/v1/products/{id}
 
