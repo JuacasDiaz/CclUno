@@ -37,7 +37,7 @@ Copiar código
 
 2.1 Obtener Inventario
 
-Endpoint: /api/inventory
+Endpoint: /api/v1/inventoryentries
 
 Método: GET
 
