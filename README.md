@@ -149,7 +149,7 @@ Respuesta:
 
 5.2 Actualizar Producto
 
-Endpoint: /api/v1/products{id}
+Endpoint: /api/v1/products/{id}
 
 Método: PUT
 
@@ -174,7 +174,7 @@ Respuesta:
 
 5.3 Eliminar Producto
 
-Endpoint: /api/v1/products{id}
+Endpoint: /api/v1/products/{id}
 
 Método: DELETE
 
