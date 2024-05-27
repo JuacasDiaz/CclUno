@@ -31,5 +31,36 @@ Copiar código
 •	200 OK - Inicio de sesión exitoso.
 •	401 Unauthorized - Credenciales incorrectas.
 
+-----------------------------------------------------------------------------------------------------------------------
+
+2. Consulta de Inventario
+
+2.1 Obtener Inventario
+
+Endpoint: /api/inventory
+
+Método: GET
+
+Descripción: Devuelve una lista de todos los productos en el inventario.
+
+Parámetros de la Solicitud:
+
+•	Authorization: Bearer {token}
+Respuesta:
+json
+Copiar código
+
+[
+    {
+        "productId": "int",
+        "productName": "string",
+        "quantity": "int",
+        "lastUpdated": "string"
+    },
+    ...
+]
+
+•	200 OK - Lista de productos obtenida con éxito.
+•	401 Unauthorized - Token no válido o expirado.
 
 
